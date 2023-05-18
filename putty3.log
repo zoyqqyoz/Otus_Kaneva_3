@@ -1,0 +1,1000 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2023.05.17 17:06:25 =~=~=~=~=~=~=~=~=~=~=~=
+vagrant ssh
+[vagrant@lvm ~]$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+sda1                    8:1    0    1M  0 part 
+sda2                    8:2    0    1G  0 part /boot
+sda3                    8:3    0   39G  0 part 
+  VolGroup00-LogVol00 253:0    0 37.5G  0 lvm  /
+  VolGroup00-LogVol01 253:1    0  1.5G  0 lvm  [SWAP]
+sdb                       8:16   0   10G  0 disk 
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+[vagrant@lvm ~]$ df -h
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00   38G  857M   37G   3% /
+devtmpfs                         109M     0  109M   0% /dev
+tmpfs                            118M     0  118M   0% /dev/shm
+tmpfs                            118M  4.6M  114M   4% /run
+tmpfs                            118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                       1014M   63M  952M   7% /boot
+tmpfs                             24M     0   24M   0% /run/user/0
+tmpfs                             24M     0   24M   0% /run/user/1000
+[vagrant@lvm ~]$ sudo yum install xfsdump
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.speedkom.de
+ * extras: ftp.plusline.net
+ * updates: mirror.rackspeed.de
+Resolving Dependencies
+--> Running transaction check
+---> Package xfsdump.x86_64 0:3.1.7-3.el7_9 will be installed
+--> Processing Dependency: attr >= 2.0.0 for package: xfsdump-3.1.7-3.el7_9.x86_64
+--> Running transaction check
+---> Package attr.x86_64 0:2.4.46-13.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================================================================================================================
+ Package                                                 Arch                                                   Version                                                        Repository                                               Size
+=============================================================================================================================================================================================================================================
+Installing:
+ xfsdump                                                 x86_64                                                 3.1.7-3.el7_9                                                  updates                                                 309 k
+Installing for dependencies:
+ attr                                                    x86_64                                                 2.4.46-13.el7                                                  base                                                     66 k
+
+Transaction Summary
+=============================================================================================================================================================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 374 k
+Installed size: 1.1 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(2/2): xfsdump-3.1.7-3.el7_9.x86_64.rpm                                                                  0% [                                                                                              ]  0.0 B/s |    0 B  --:--:-- ETA (1/2): attr-2.4.46-13.el7.x86_64.rpm                                                                                                                                                                                  |  66 kB  00:00:00     
+(2/2): xfsdump-3.1.7-3.el7_9.x86_64.rpm                                                                                                                                                                               | 309 kB  00:00:00     
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                                                        550 kB/s | 374 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : attr-2.4.46-13.el7.x86_64 [                                                                                                                                                                                             ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########                                                                                                                                                                                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##################################                                                                                                                                                           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###################################################                                                                                                                                          ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################################################                                                                                                                                     ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########################################################################                                                                                                                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###############################################################################                                                                                                              ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################################                                                                                                            ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##############################################################################################                                                                                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################################################################################################                                                                                         ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#######################################################################################################################                                                                      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################################################                                                                     ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##########################################################################################################################                                                                   ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##############################################################################################################################                                                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [######################################################################################################################################                                                       ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########################################################################################################################################                                                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################################################################################################                                            ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################################################################################################                                    ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##############################################################################################################################################################                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################################################################################################################################################################                         ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########################################################################################################################################################################                  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#################################################################################################################################################################################            ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#####################################################################################################################################################################################        ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#######################################################################################################################################################################################      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################################################################################################################################    ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########################################################################################################################################################################################  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64                                                                                                                                                                                                 1/2 
+  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [                                                                                                                                                                                          ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [###########                                                                                                                                                                               ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [########################                                                                                                                                                                  ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#####################################                                                                                                                                                     ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [################################################                                                                                                                                          ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#######################################################                                                                                                                                   ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [####################################################################                                                                                                                      ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#################################################################################                                                                                                         ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#############################################################################################                                                                                             ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [##########################################################################################################                                                                                ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#######################################################################################################################                                                                   ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [##################################################################################################################################                                                        ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#########################################################################################################################################                                                 ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [###############################################################################################################################################                                           ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [##################################################################################################################################################                                        ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [####################################################################################################################################################                                      ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [###############################################################################################################################################################                           ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [#####################################################################################################################################################################                     ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [################################################################################################################################################################################          ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [####################################################################################################################################################################################      ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [######################################################################################################################################################################################    ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64 [########################################################################################################################################################################################  ] 2/2  Installing : xfsdump-3.1.7-3.el7_9.x86_64                                                                                                                                                                                              2/2 
+  Verifying  : attr-2.4.46-13.el7.x86_64                                                                                                                                                                                                 1/2 
+  Verifying  : xfsdump-3.1.7-3.el7_9.x86_64                                                                                                                                                                                              2/2 
+
+Installed:
+  xfsdump.x86_64 0:3.1.7-3.el7_9                                                                                                                                                                                                             
+
+Dependency Installed:
+  attr.x86_64 0:2.4.46-13.el7                                                                                                                                                                                                                
+
+Complete!
+[vagrant@lvm ~]$ sudo pvs
+  PV         VG         Fmt  Attr PSize   PFree
+  /dev/sda3  VolGroup00 lvm2 a--  <38.97g    0 
+[vagrant@lvm ~]$ sudo pvcreate /dev/sdb
+  Physical volume "/dev/sdb" successfully created.
+[vagrant@lvm ~]$ sudo pvcreate /dev/sdbs
+  PV         VG         Fmt  Attr PSize   PFree 
+  /dev/sda3  VolGroup00 lvm2 a--  <38.97g     0 
+  /dev/sdb              lvm2 ---   10.00g 10.00g
+[vagrant@lvm ~]$ sudo vgcreate vg_root /dev/sdb
+  Volume group "vg_root" successfully created
+[vagrant@lvm ~]$ sudp vgs
+-bash: sudp: command not found
+[vagrant@lvm ~]$ sudp vgs vgso vgs
+  VG         #PV #LV #SN Attr   VSize   VFree  
+  VolGroup00   1   2   0 wz--n- <38.97g      0 
+  vg_root      1   0   0 wz--n- <10.00g <10.00g
+[vagrant@lvm ~]$ sudo lvcreate -n lv_root -l +100%FREE /dev/vg_root
+  Logical volume "lv_root" created.
+[vagrant@lvm ~]$ sudo mkfs.xfs /dev/vg_root/lv_root
+meta-data=/dev/vg_root/lv_root   isize=512    agcount=4, agsize=655104 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2620416, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[vagrant@lvm ~]$ sudo mkfs.xfs /dev/vg_root/lv_rootsudo mount /dev/vg_root/lVv_root /mnt
+[vagrant@lvm ~]$ sudo xfsdump -J - /dev/VolGroup00-LogVol00 | xfsrestore -J - /mnt
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsrestore: ERROR: unable to create /mnt/xfsrestorehousekeepingdir: Permission denied
+xfsrestore: Restore Status: ERROR
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: ERROR: /dev/VolGroup00-LogVol00 does not identify a file system
+xfsdump: usage: xfsdump [ -a (dump DMF dualstate files as offline) ]
+                        [ -b <blocksize> ]
+                        [ -c <media change alert program>  ]
+                        [ -d <dump media file size>  ]
+                        [ -e (allow files to be excluded) ]
+                        [ -f <destination> ... ]
+                        [ -h (help) ]
+                        [ -l <level> ]
+                        [ -m (force usage of minimal rmt) ]
+                        [ -o (overwrite tape) ]
+                        [ -p <seconds between progress reports> ]
+                        [ -q <use QIC tape settings> ]
+                        [ -s <subtree> ... ]
+                        [ -t <file> (use file mtime for dump time ]
+                        [ -v <verbosity {silent, verbose, trace}> ]
+                        [ -z <maximum file size> ]
+                        [ -A (don't dump extended file attributes) ]
+                        [ -B <base dump session id> ]
+                        [ -D (skip unchanged directories) ]
+                        [ -E (pre-erase media) ]
+                        [ -F (don't prompt) ]
+                        [ -I (display dump inventory) ]
+                        [ -J (inhibit inventory update) ]
+                        [ -K (generate format 2 dump) ]
+                        [ -L <session label> ]
+                        [ -M <media label> ... ]
+                        [ -O <options file> ]
+                        [ -R (resume) ]
+                        [ -T (don't timeout dialogs) ]
+                        [ -Y <I/O buffer ring length> ]
+                        [ - (stdout) ]
+                        [ <source (mntpnt|device)> ]
+xfsdump: Dump Status: ERROR
+[vagrant@lvm ~]$ sudo xfsdump -J - /dev/VolGroup00-LogVol00 | xfsrestore -J - /mntsudo 
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: ERROR: /dev/VolGroup00-LogVol00 does not identify a file system
+xfsdump: usage: xfsdump [ -a (dump DMF dualstate files as offline) ]
+                        [ -b <blocksize> ]
+                        [ -c <media change alert program>  ]
+                        [ -d <dump media file size>  ]
+                        [ -e (allow files to be excluded) ]
+                        [ -f <destination> ... ]
+                        [ -h (help) ]
+                        [ -l <level> ]
+                        [ -m (force usage of minimal rmt) ]
+                        [ -o (overwrite tape) ]
+                        [ -p <seconds between progress reports> ]
+                        [ -q <use QIC tape settings> ]
+                        [ -s <subtree> ... ]
+                        [ -t <file> (use file mtime for dump time ]
+                        [ -v <verbosity {silent, verbose, trace}> ]
+                        [ -z <maximum file size> ]
+                        [ -A (don't dump extended file attributes) ]
+                        [ -B <base dump session id> ]
+                        [ -D (skip unchanged directories) ]
+                        [ -E (pre-erase media) ]
+                        [ -F (don't prompt) ]
+                        [ -I (display dump inventory) ]
+                        [ -J (inhibit inventory update) ]
+                        [ -K (generate format 2 dump) ]
+                        [ -L <session label> ]
+                        [ -M <media label> ... ]
+                        [ -O <options file> ]
+                        [ -R (resume) ]
+                        [ -T (don't timeout dialogs) ]
+                        [ -Y <I/O buffer ring length> ]
+                        [ - (stdout) ]
+                        [ <source (mntpnt|device)> ]
+xfsdump: Dump Status: ERROR
+xfsrestore: searching media for dump
+xfsrestore: restore complete: 0 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+[vagrant@lvm ~]$ sudo xfsdump -J - /dev/VolGroup00-LogVol00 | sudo xfsrestore -J - /mnt/
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of lvm:/
+xfsdump: dump date: Wed May 17 14:21:38 2023
+xfsdump: session id: ec608cfe-f0eb-481e-8e1e-c8431dffd1b7
+xfsdump: session label: ""
+xfsdump: ino map phase 1: constructing initial dump list
+xfsrestore: searching media for dump
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 860386944 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: lvm
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/VolGroup00-LogVol00
+xfsrestore: session time: Wed May 17 14:21:38 2023
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: b60e9498-0baa-4d9f-90aa-069048217fee
+xfsrestore: session id: ec608cfe-f0eb-481e-8e1e-c8431dffd1b7
+xfsrestore: media id: 889d175e-cafe-480e-a13e-4e1ef8788ec8
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 2717 directories and 23634 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 837431624 bytes
+xfsdump: dump size (non-dir files) : 824250912 bytes
+xfsdump: dump complete: 21 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 22 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+[vagrant@lvm ~]$ ls /mnt
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[vagrant@lvm ~]$ ls -l /mnt
+total 12
+lrwxrwxrwx.  1 root root    7 May 17 14:21 bin -> usr/bin
+drwxr-xr-x.  2 root root    6 May 12  2018 boot
+drwxr-xr-x.  2 root root    6 May 12  2018 dev
+drwxr-xr-x. 79 root root 8192 May 17 14:00 etc
+drwxr-xr-x.  3 root root   21 May 12  2018 home
+lrwxrwxrwx.  1 root root    7 May 17 14:21 lib -> usr/lib
+lrwxrwxrwx.  1 root root    9 May 17 14:21 lib64 -> usr/lib64
+drwxr-xr-x.  2 root root    6 Apr 11  2018 media
+drwxr-xr-x.  2 root root    6 Apr 11  2018 mnt
+drwxr-xr-x.  2 root root    6 Apr 11  2018 opt
+drwxr-xr-x.  2 root root    6 May 12  2018 proc
+dr-xr-x---.  3 root root  149 May 17 13:59 root
+drwxr-xr-x.  2 root root    6 May 12  2018 run
+lrwxrwxrwx.  1 root root    8 May 17 14:21 sbin -> usr/sbin
+drwxr-xr-x.  2 root root    6 Apr 11  2018 srv
+drwxr-xr-x.  2 root root    6 May 12  2018 sys
+drwxrwxrwt.  8 root root  193 May 17 14:14 tmp
+drwxr-xr-x. 13 root root  155 May 12  2018 usr
+drwxr-xr-x. 18 root root  254 May 17 13:59 var
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done 
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+[vagrant@lvm ~]$ sudo for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done 
+-bash: syntax error near unexpected token `do'
+[vagrant@lvm ~]$ sudo for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done 
+-bash: syntax error near unexpected token `done'
+[vagrant@lvm ~]$ sudo for i in /proc/ /sys/ /dev/ /run/ /boot/; mount --bind $i /mnt/$i; done do sudo 
+-bash: syntax error near unexpected token `do'
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done 
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+mount: only root can use "--bind" option
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done  sudo
+[vagrant@lvm ~]$ chroot /mnt
+chroot: cannot change root directory to /mnt: Operation not permitted
+[vagrant@lvm ~]$ chroot /mntsudo 
+[root@lvm /]# grunb2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+[root@lvm /]# cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g;  s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+[root@lvm boot]# nano /boot/grub2/grub.cfg
+bash: nano: command not found
+[root@lvm boot]# yum install nano
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.speedkom.de
+ * extras: ftp.plusline.net
+ * updates: mirror.rackspeed.de
+Resolving Dependencies
+--> Running transaction check
+---> Package nano.x86_64 0:2.3.1-10.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================================================================================================================
+ Package                                                Arch                                                     Version                                                        Repository                                              Size
+=============================================================================================================================================================================================================================================
+Installing:
+ nano                                                   x86_64                                                   2.3.1-10.el7                                                   base                                                   440 k
+
+Transaction Summary
+=============================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 440 k
+Installed size: 1.6 M
+Is this ok [y/d/N]: y
+Downloading packages:
+nano-2.3.1-10.el7.x86_64.rpm                                                                             0% [                                                                                              ]  0.0 B/s |    0 B  --:--:-- ETA nano-2.3.1-10.el7.x86_64.rpm                                                                                                                                                                                          | 440 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : nano-2.3.1-10.el7.x86_64 [                                                                                                                                                                                              ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#######                                                                                                                                                                                       ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###############                                                                                                                                                                               ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [####################                                                                                                                                                                          ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [######################                                                                                                                                                                        ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [########################                                                                                                                                                                      ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [############################                                                                                                                                                                  ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [##################################                                                                                                                                                            ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#########################################                                                                                                                                                     ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###########################################                                                                                                                                                   ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###############################################                                                                                                                                               ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#################################################                                                                                                                                             ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###################################################                                                                                                                                           ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#######################################################                                                                                                                                       ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [############################################################                                                                                                                                  ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [################################################################                                                                                                                              ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [######################################################################                                                                                                                        ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [##########################################################################                                                                                                                    ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###############################################################################                                                                                                               ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###################################################################################                                                                                                           ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#####################################################################################                                                                                                         ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###########################################################################################                                                                                                   ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [################################################################################################                                                                                              ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [####################################################################################################                                                                                          ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [########################################################################################################                                                                                      ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [##############################################################################################################                                                                                ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [################################################################################################################                                                                              ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###################################################################################################################                                                                           ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#######################################################################################################################                                                                       ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###########################################################################################################################                                                                   ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#################################################################################################################################                                                             ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [######################################################################################################################################                                                        ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [##########################################################################################################################################                                                    ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [############################################################################################################################################                                                  ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [####################################################################################################################################################                                          ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [######################################################################################################################################################                                        ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [########################################################################################################################################################                                      ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#########################################################################################################################################################                                     ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###########################################################################################################################################################                                   ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#################################################################################################################################################################                             ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#####################################################################################################################################################################                         ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#######################################################################################################################################################################                       ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [#########################################################################################################################################################################                     ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [###########################################################################################################################################################################                   ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [############################################################################################################################################################################                  ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [################################################################################################################################################################################              ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [####################################################################################################################################################################################          ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [######################################################################################################################################################################################        ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [##########################################################################################################################################################################################    ] 1/1  Installing : nano-2.3.1-10.el7.x86_64 [############################################################################################################################################################################################  ] 1/1  Installing : nano-2.3.1-10.el7.x86_64                                                                                                                                                                                                  1/1 
+  Verifying  : nano-2.3.1-10.el7.x86_64                                                                                                                                                                                                  1/1 
+
+Installed:
+  nano.x86_64 0:2.3.1-10.el7                                                                                                                                                                                                                 
+
+Complete!
+[root@lvm boot]# yum install nanonano /boot/grub2/grub.cfg
+  GNU nano 2.3.1                                                               File: /boot/grub2/grub.cfg                                                                                                                                    ## DO NOT EDIT THIS FILE## It is automatically generated by grub2-mkconfig using templates# from /etc/grub.d and settings from /etc/default/grub#### BEGIN /etc/grub.d/00_header ###set pager=1if [ -s $prefix/grubenv ]; thenload_envfiif [ "${next_entry}" ] ; thenset default="${next_entry}"set next_entry=save_env next_entryset boot_once=trueelseset default="${saved_entry}"fiif [ x"${feature_menuentry_id}" = xy ]; thenmenuentry_id_option="--id"elsemenuentry_id_option=""fiexport menuentry_id_optionif [ "${prev_saved_entry}" ]; thenset saved_entry="${prev_saved_entry}"save_env saved_entryset prev_saved_entry=save_env prev_saved_entryset boot_once=truefifunction savedefault {if [ -z "${boot_once}" ]; thensaved_entry="${chosen}"save_env saved_entryfi}function load_video {if [ x$feature_all_video_module = xy ]; theninsmod all_videoelseinsmod efi_gopinsmod efi_ugainsmod ieee1275_fbinsmod vbeinsmod vgainsmod video_bochsinsmod video_cirrusfi}[ Read 127 lines ]^G Get Help^O WriteOut^R Read File^Y Prev Page^K Cut Text^C Cur Pos^X Exit^J Justify^W Where Is^V Next Page^U UnCut Text^T To Spellterminal_output consoleif [ x$feature_timeout_style = xy ] ; thenset timeout_style=menuset timeout=1# Fallback normal timeout code in case the timeout_style feature is# unavailable.elseset timeout=1fi### END /etc/grub.d/00_header ###### BEGIN /etc/grub.d/00_tuned ###set tuned_params=""set tuned_initrd=""### END /etc/grub.d/00_tuned ###### BEGIN /etc/grub.d/01_users ###if [ -f ${prefix}/user.cfg ]; thensource ${prefix}/user.cfgif [ -n "${GRUB2_PASSWORD}" ]; thenset superusers="root"export superuserspassword_pbkdf2 root ${GRUB2_PASSWORD}fifi### END /etc/grub.d/01_users ###### BEGIN /etc/grub.d/10_linux ###menuentry 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-3d9ca0ac-e5e2-4937-90d1-8dc32cde6121'$load_videoset gfxpayload=keepinsmod gzioinsmod part_msdosinsmod xfsset root='hd0,msdos2'if [ x$feature_platform_search_hint = xy ]; thensearch --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos2 --hint-efi=hd0,msdos2 --hint-baremetal=ahci0,msdos2  570897ca-e759-4c81-90cf-389da6eee4ccelsesearch --no-floppy --fs-uuid --set=root 570897ca-e759-4c81-90cf-389da6eee4ccfilinux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/vg_root-lv_root ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv$initrd16 /initramfs-3.10.0-862.2.3.el7.x86_64.img}if [ "x$default" = 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' ]; then default='Advanced options for CentOS Linux>CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;### END /etc/grub.d/10_linux ###### BEGIN /etc/grub.d/20_linux_xen ###### END /etc/grub.d/20_linux_xen ###### BEGIN /etc/grub.d/20_ppc_terminfo ###### END /etc/grub.d/20_ppc_terminfo ###### BEGIN /etc/grub.d/30_os-prober ###### END /etc/grub.d/30_os-prober ###### BEGIN /etc/grub.d/40_custom #### This file provides an easy way to add custom menu entries.  Simply type the# menu entries you want to add after this comment.  Be careful not to change# the 'exec tail' line above.### END /etc/grub.d/40_custom ###### BEGIN /etc/grub.d/41_custom ###if [ -f  ${config_directory}/custom.cfg ]; thensource ${config_directory}/custom.cfgelif [ -z "${config_directory}" -a -f  $prefix/custom.cfg ]; thensource $prefix/custom.cfg;fi### END /etc/grub.d/41_custom ###if [ x$feature_timeout_style = xy ] ; thenset timeout_style=menuset timeout=1# Fallback normal timeout code in case the timeout_style feature is# unavailable.elseset timeout=1fi### END /etc/grub.d/00_header ###### BEGIN /etc/grub.d/00_tuned ###set tuned_params=""set tuned_initrd=""### END /etc/grub.d/00_tuned ###### BEGIN /etc/grub.d/01_users ###if [ -f ${prefix}/user.cfg ]; thensource ${prefix}/user.cfgif [ -n "${GRUB2_PASSWORD}" ]; thenset superusers="root"export superuserspassword_pbkdf2 root ${GRUB2_PASSWORD}fifi### END /etc/grub.d/01_users ###### BEGIN /etc/grub.d/10_linux ###menuentry 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-3d9ca0ac-e5e2-4937-90d1-8dc32cde6121'$load_videoset gfxpayload=keepfilinux16/vmlinu-3.10.0862.2.3el7.x8664 root/dev/maper/vg_oot-lv_oot ro o_timercheck cnsole=ty0 consle=ttyS,1152008 net.inames=0biosdevame=0 eevator=oop crahkernelauto rdlvm.lv=olGroup0/LogVo00 rd.lm.l$lvm.lv=VolGroup00/LogVol01 rhgb quietVolGrou00linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/vg_root-lv_root ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv$$lvm.lv=VolGroup00/LogVol01 rhgb quietModifiedv/LogVol01 rhgb quietg/LogVol01 rhgb quiet_/LogVol01 rhgb quietr/LogVol01 rhgb quieto/LogVol01 rhgb quietoo/LogVol01 rhgb quiett/LogVol01 rhgb quietl rhgb quietv rhgb quiet_ rhgb quietr rhgb quieto rhgb quietoo rhgb quiett rhgb quietFile Name to Write: /boot/grub2/grub.cfg                                                                                                                                                                                                                M-D DOS Format M-A Append            M-B Backup FileC Cancel          M-M Mac Format M-P Prepend         [ Wrote 127 lines ]^O WriteOut^R Read File^Y Prev Page^K Cut Text^C Cur PosX Exit  ^J Justify^W Where Is^V Next Page^U UnCut Text^T To Spell[root@lvm boot]# reboot
+Running in chroot, ignoring request.
+[root@lvm boot]# exit
+exit
+[vagrant@lvm ~]$ reboot
+==== AUTHENTICATING FOR org.freedesktop.login1.reboot ===
+Authentication is required for rebooting the system.
+Authenticating as: root
+Password: 
+==== AUTHENTICATION COMPLETE ===
+Connection to 127.0.0.1 closed by remote host.
+neva@Uneva:~$ vagrant ssh
+Last login: Wed May 17 14:10:01 2023 from 10.0.2.2
+[vagrant@lvm ~]$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+sda1                    8:1    0    1M  0 part 
+sda2                    8:2    0    1G  0 part /boot
+sda3                    8:3    0   39G  0 part 
+  VolGroup00-LogVol00 253:0    0 37.5G  0 lvm  
+  VolGroup00-LogVol01 253:2    0  1.5G  0 lvm  [SWAP]
+sdb                       8:16   0   10G  0 disk 
+vg_root-lv_root       253:1    0   10G  0 lvm  /
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+[vagrant@lvm ~]$ df -h
+Filesystem                   Size  Used Avail Use% Mounted on
+/dev/mapper/vg_root-lv_root   10G  859M  9.2G   9% /
+devtmpfs                     110M     0  110M   0% /dev
+tmpfs                        118M     0  118M   0% /dev/shm
+tmpfs                        118M  4.5M  114M   4% /run
+tmpfs                        118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                   1014M   61M  954M   6% /boot
+tmpfs                         24M     0   24M   0% /run/user/1000
+[vagrant@lvm ~]$ sudo lvremove VolGroup00-LogVol00LogVol00/LogVol00/VolGroup00/LogVol00dVolGroup00/LogVol00eVolGroup00/LogVol00vVolGroup00/LogVol00/VolGroup00/LogVol00
+Do you really want to remove active logical volume VolGroup00/LogVol00? [y/n]: y
+  Logical volume "LogVol00" successfully removed
+[vagrant@lvm ~]$ sudo lvcreate -n VolGroup00/LogVol00 -L 8G /dev/ VolGroup00VolGroup00
+WARNING: xfs signature detected on /dev/VolGroup00/LogVol00 at offset 0. Wipe it? [y/n]: y
+  Wiping xfs signature on /dev/VolGroup00/LogVol00.
+  Logical volume "LogVol00" created.
+[vagrant@lvm ~]$ sudo mkfs.xfs  /dev/VolGroup00/LogVol00/dev/VolGroup00/LogVol00
+meta-data=/dev/VolGroup00/LogVol00 isize=512    agcount=4, agsize=524288 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2097152, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[vagrant@lvm ~]$ sudo mount /dev/VolGroup00/LogVol00 /mnt 
+[vagrant@lvm ~]$ sudo xfsdump  -J - /dev/vg_root/lv_root | sudo xfsrestore -J - /mnt 
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of lvm:/
+xfsdump: dump date: Wed May 17 15:01:25 2023
+xfsdump: session id: 6ec0b4ba-4a85-4c69-8940-fe8a7d91303e
+xfsdump: session label: ""
+xfsrestore: searching media for dump
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 861216640 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: lvm
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/vg_root-lv_root
+xfsrestore: session time: Wed May 17 15:01:25 2023
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: 3d9ca0ac-e5e2-4937-90d1-8dc32cde6121
+xfsrestore: session id: 6ec0b4ba-4a85-4c69-8940-fe8a7d91303e
+xfsrestore: media id: 26ebafe3-88f8-4a25-98be-aa0065654007
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 2760 directories and 23782 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 838019448 bytes
+xfsdump: dump size (non-dir files) : 824742104 bytes
+xfsdump: dump complete: 24 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 24 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+[vagrant@lvm ~]$ login as: neva
+neva@95.161.177.245's password: 
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.19.0-41-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+Expanded Security Maintenance for Applications is not enabled.
+
+13 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+4 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+Last login: Wed May 17 09:47:43 2023 from 95.161.177.237
+neva@Uneva:~$ vagrant ssh
+Last login: Wed May 17 14:54:37 2023 from 10.0.2.2
+[vagrant@lvm ~]$ ls -l /mnt
+total 12
+lrwxrwxrwx.  1 root root    7 May 17 15:01 bin -> usr/bin
+drwxr-xr-x.  2 root root    6 May 12  2018 boot
+drwxr-xr-x.  2 root root    6 May 12  2018 dev
+drwxr-xr-x. 79 root root 8192 May 17 14:54 etc
+drwxr-xr-x.  3 root root   21 May 12  2018 home
+lrwxrwxrwx.  1 root root    7 May 17 15:01 lib -> usr/lib
+lrwxrwxrwx.  1 root root    9 May 17 15:01 lib64 -> usr/lib64
+drwxr-xr-x.  2 root root    6 Apr 11  2018 media
+drwxr-xr-x.  2 root root    6 Apr 11  2018 mnt
+drwxr-xr-x.  2 root root    6 Apr 11  2018 opt
+drwxr-xr-x.  2 root root    6 May 12  2018 proc
+dr-xr-x---.  3 root root  170 May 17 14:53 root
+drwxr-xr-x.  2 root root    6 May 12  2018 run
+lrwxrwxrwx.  1 root root    8 May 17 15:01 sbin -> usr/sbin
+drwxr-xr-x.  2 root root    6 Apr 11  2018 srv
+drwxr-xr-x.  2 root root    6 May 12  2018 sys
+drwxrwxrwt.  9 root root  272 May 17 14:55 tmp
+drwxr-xr-x. 13 root root  155 May 12  2018 usr
+drwxr-xr-x. 18 root root  254 May 17 13:59 var
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; donesudo 
+-bash: syntax error near unexpected token `sudo'
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done  sudo
+-bash: syntax error near unexpected token `sudo'
+[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done  sudosudo 
+[vagrant@lvm ~]$ sudo chroot /mnt/
+[root@lvm /]# grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+[root@lvm /]# cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g;  s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+[root@lvm boot]# pvc
+pvchange  pvck      pvcreate  
+[root@lvm boot]# pvcreate /dec/v/sdc /dev/sdd
+  Physical volume "/dev/sdc" successfully created.
+  Physical volume "/dev/sdd" successfully created.
+[root@lvm boot]# vgcreate vg_var /dev/dsdc /dev/sdd
+  Volume group "vg_var" successfully created
+[root@lvm boot]# lvcreate -L950M 950M -m1 -n lv_varvg_var
+  No command with matching syntax recognised.  Run 'lvcreate --help' for more information.
+  Nearest similar command has syntax:
+  lvcreate -m|--mirrors Number -L|--size Size[m|UNIT] VG
+  Create a raid1 or mirror LV (infers --type raid1|mirror).
+
+[root@lvm boot]# lvcreate -L 950M -m1 -n lv_varvg_var vg_var
+  Rounding up size to full physical extent 952.00 MiB
+  Logical volume "lv_var" created.
+[root@lvm boot]# mkfs.ext4 /dev/vg_var/lv_var
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+60928 inodes, 243712 blocks
+12185 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=249561088
+8 block groups
+32768 blocks per group, 32768 fragments per group
+7616 inodes per group
+Superblock backups stored on blocks: 
+32768, 98304, 163840, 229376
+
+Allocating group tables: 0/8   done                            
+Writing inode tables: 0/8   done                            
+Creating journal (4096 blocks): done
+Writing superblocks and filesystem accounting information: 0/8   done
+
+[root@lvm boot]# ls /mnt
+[root@lvm boot]# mount /dev/vg_ver/lv_var /mnta
+[root@lvm boot]# cap -RaR /var/* /mnt/ # rsync -avHPSAX /var/ /mnt/
+[root@lvm boot]# ls /mnt
+adm  cache  db  empty  games  gopher  kerberos  lib  local  lock  log  lost+found  mail  nis  opt  preserve  run  spool  tmp  yp
+[root@lvm boot]# mkdir /tmp/oldverar && mv /var/* /tmp/oldvar
+[root@lvm boot]# umount /varmnt
+[root@lvm boot]# mount /dev\/vg_var/lv_var /var
+[root@lvm boot]# ls var
+ls: cannot access var: No such file or directory
+[root@lvm boot]# ls var/var
+adm  cache  db  empty  games  gopher  kerberos  lib  local  lock  log  lost+found  mail  nis  opt  preserve  run  spool  tmp  yp
+[root@lvm boot]# echo "`blkid | grep var: | awk '{print $2}'` /var ext4 defaults 0 0" >> /etc/fstab
+[root@lvm boot]# cat \etc/etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="2cf4a2fd-5837-490c-94e4-38c75546cca0" /var ext4 defaults 0 0
+[root@lvm boot]# exit
+exit
+[vagrant@lvm ~]$ reboosudo reboot
+Connection to 127.0.0.1 closed by remote host.
+neva@Uneva:~$ vagrant ssh
+Last login: Wed May 17 14:54:37 2023 from 10.0.2.2
+[vagrant@lvm ~]$ df -h
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00  8.0G  859M  7.2G  11% /
+devtmpfs                         110M     0  110M   0% /dev
+tmpfs                            118M     0  118M   0% /dev/shm
+tmpfs                            118M  4.5M  114M   4% /run
+tmpfs                            118M     0  118M   0% /sys/fs/cgroup
+/dev/sde2                       1014M   61M  954M   6% /boot
+/dev/mapper/vg_var-lv_var        922M  232M  627M  27% /var
+[vagrant@lvm ~]$ sudo lvremove /dev/vg_root/lv_root
+Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
+  Logical volume "lv_root" successfully removed
+[vagrant@lvm ~]$ sudo vgremove /dev/vg_root
+  Volume group "vg_root" successfully removed
+[vagrant@lvm ~]$ psudo pvremove /dev/sdb
+  Can't open /dev/sdb exclusively.  Mounted filesystem?
+[vagrant@lvm ~]$ lsblk
+NAME                     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                        8:0    0   10G  0 disk 
+sdb                        8:16   0    2G  0 disk 
+vg_var-lv_var_rmeta_0  253:3    0    4M  0 lvm  
+ vg_var-lv_var        253:7    0  952M  0 lvm  /var
+vg_var-lv_var_rimage_0 253:4    0  952M  0 lvm  
+  vg_var-lv_var        253:7    0  952M  0 lvm  /var
+sdc                        8:32   0    1G  0 disk 
+vg_var-lv_var_rmeta_1  253:5    0    4M  0 lvm  
+ vg_var-lv_var        253:7    0  952M  0 lvm  /var
+vg_var-lv_var_rimage_1 253:6    0  952M  0 lvm  
+  vg_var-lv_var        253:7    0  952M  0 lvm  /var
+sdd                        8:48   0    1G  0 disk 
+sde                        8:64   0   40G  0 disk 
+sde1                     8:65   0    1M  0 part 
+sde2                     8:66   0    1G  0 part /boot
+sde3                     8:67   0   39G  0 part 
+  VolGroup00-LogVol00  253:0    0    8G  0 lvm  /
+  VolGroup00-LogVol01  253:1    0  1.5G  0 lvm  [SWAP]
+[vagrant@lvm ~]$ pvs
+  WARNING: Running as a non-root user. Functionality may be unavailable.
+  /run/lvm/lvmetad.socket: access failed: Permission denied
+  WARNING: Failed to connect to lvmetad. Falling back to device scanning.
+  /run/lock/lvm/P_global:aux: open failed: Permission denied
+  Unable to obtain global lock.
+[vagrant@lvm ~]$ sudo pvs
+  PV         VG         Fmt  Attr PSize    PFree  
+  /dev/sda              lvm2 ---    10.00g  10.00g
+  /dev/sdb   vg_var     lvm2 a--    <2.00g   1.06g
+  /dev/sdc   vg_var     lvm2 a--  1020.00m  64.00m
+  /dev/sde3  VolGroup00 lvm2 a--   <38.97g <29.47g
+[vagrant@lvm ~]$ sudo pvspvslsblksudo pvremove /dev/sdbd
+  No PV label found on /dev/sdd.
+[vagrant@lvm ~]$ sudo lvcreate -n LOGogVOol_Home -L 2G /dev/VolGroup00
+  Logical volume "LogVol_Home" created.
+[vagrant@lvm ~]$ mfsudo mkfs.xfs /dev/VolGroup00/LogVol_Home 
+meta-data=/dev/VolGroup00/LogVol_Home isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[vagrant@lvm ~]$ mosudo mntount /dev/VolGroup00/LogVol_Home /mnt/
+[vagrant@lvm ~]$ sudo cp -aR /home/* /mnt/
+[vagrant@lvm ~]$ ls -mnt/mnt
+vagrant
+[vagrant@lvm ~]$ sudo tmrm -rf /home/*
+[vagrant@lvm ~]$ sudo umount /mnt
+[vagrant@lvm ~]$ siudo mount /dev/VolGroup00/LogVol_Home /ome/home/
+[vagrant@lvm ~]$ ls /home
+vagrant
+[vagrant@lvm ~]$ sudo cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="2cf4a2fd-5837-490c-94e4-38c75546cca0" /var ext4 defaults 0 0
+[vagrant@lvm ~]$ sudo echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
+-bash: /etc/fstab: Permission denied
+[vagrant@lvm ~]$ /home
+-bash: /home: Is a directory
+[vagrant@lvm ~]$ sudo echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
+-bash: /etc/fstab: Permission denied
+[vagrant@lvm ~]$ sudo echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab /etc/fstab /etc/fstab/etc/fstabetc/fstabtc/fstabc/fstab/fstabfstabstabtababb sudo sh -c "echo "`blkid | grep home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab"
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+
+[vagrant@lvm ~]$  sudo sh -c "echo "`blkid | grep home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab" /etc/fstab" /etc/fstab"/etc/fstab"etc/fstab"tc/fstab"c/fstab"/fstab"fstab"stab"tab"ab"b""pwd
+/home/vagrant
+[vagrant@lvm ~]$ cd /home
+[vagrant@lvm home]$ cd /homepwd sudo sh -c "echo "`blkid | grep home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab"
+
+[vagrant@lvm home]$ cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="2cf4a2fd-5837-490c-94e4-38c75546cca0" /var ext4 defaults 0 0
+[vagrant@lvm home]$ su -l root
+Password: 
+
+
+
+rrr   [root@lvm ~]# 
+[root@lvm ~]# 
+[root@lvm ~]# 
+[root@lvm ~]# echo "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >> /etc/fstab
+[root@lvm ~]# cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="2cf4a2fd-5837-490c-94e4-38c75546cca0" /var ext4 defaults 0 0
+UUID="f8e012d6-11c1-44fa-b0de-645db7d50db7" /home xfs defaults 0 0
+[root@lvm ~]# su -l vagrant
+Last login: Thu May 18 06:56:27 UTC 2023 from 10.0.2.2 on pts/1
+[vagrant@lvm ~]$ cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="2cf4a2fd-5837-490c-94e4-38c75546cca0" /var ext4 defaults 0 0
+UUID="f8e012d6-11c1-44fa-b0de-645db7d50db7" /home xfs defaults 0 0
+[vagrant@lvm ~]$ pwd
+/home/vagrant
+[vagrant@lvm ~]$ sudo touch /home/file{1-20}
+[vagrant@lvm ~]$ ls /home
+file{1-20}  vagrant
+[vagrant@lvm ~]$ ls /homesudo touch /home/file{1-20}20}.20}.20}.20}20}
+[vagrant@lvm ~]$ sudo touch /home/file{1..20}ls /home
+file1  file10  file11  file12  file{1-20}  file13  file14  file15  file16  file17  file18  file19  file2  file20  file3  file4  file5  file6  file7  file8  file9  vagrant
+[vagrant@lvm ~]$ sudo lvcreate -L 100MbB -s -n /home_snap /dev/VolGroup00/LogVol_hOME
+  Snapshot origin LV LogVol_hOME not found in Volume group VolGroup00.
+[vagrant@lvm ~]$ sudo lvcreate -L 100MB -s -n home_snap /dev/VolGroup00/LogVol_hOMEHome
+  Rounding up size to full physical extent 128.00 MiB
+  Logical volume "home_snap" created.
+[vagrant@lvm ~]$ sudo rm -f /home/file{1-20}
+[vagrant@lvm ~]$ sudo rm -f /home/file{1-20}20}.20}.20}
+[vagrant@lvm ~]$ ls /home
+vagrant
+[vagrant@lvm ~]$ sudo umount /home
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[vagrant@lvm ~]$ pwd
+/home/vagrant
+[vagrant@lvm ~]$ cd /
+[vagrant@lvm /]$ cd /pwd
+/
+[vagrant@lvm /]$ pwdcd /pwdsudo umount /home
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[vagrant@lvm /]$ lsodf /home
+-bash: lsof: command not found
+[vagrant@lvm /]$ sudo fuser -mv /home
+sudo: fuser: command not found
+[vagrant@lvm /]$ su -l root
+Password: 
+Last login: Thu May 18 07:40:32 UTC 2023 on pts/1
+[root@lvm ~]# umount /home
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[root@lvm ~]# yum install lsof
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.speedkom.de
+ * extras: ftp.plusline.net
+ * updates: mirror.rackspeed.de
+base                                                                                                                                                                                                                  | 3.6 kB  00:00:00     
+extras                                                                                                                                                                                                                | 2.9 kB  00:00:00     
+updates                                                                                                                                                                                                               | 2.9 kB  00:00:00     
+Resolving Dependencies
+--> Running transaction check
+---> Package lsof.x86_64 0:4.87-6.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================================================================================================================
+ Package                                                Arch                                                     Version                                                        Repository                                              Size
+=============================================================================================================================================================================================================================================
+Installing:
+ lsof                                                   x86_64                                                   4.87-6.el7                                                     base                                                   331 k
+
+Transaction Summary
+=============================================================================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 331 k
+Installed size: 927 k
+Is this ok [y/d/N]: y
+Downloading packages:
+lsof-4.87-6.el7.x86_64.rpm                                                                                                                                                                                            | 331 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : lsof-4.87-6.el7.x86_64 [                                                                                                                                                                                                ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [###########                                                                                                                                                                                     ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [########################                                                                                                                                                                        ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##############################                                                                                                                                                                  ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [################################                                                                                                                                                                ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [######################################                                                                                                                                                          ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [###################################################                                                                                                                                             ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [#################################################################                                                                                                                               ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [########################################################################                                                                                                                        ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [######################################################################################                                                                                                          ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [###################################################################################################                                                                                             ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [#################################################################################################################                                                                               ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##############################################################################################################################                                                                  ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [########################################################################################################################################                                                        ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##########################################################################################################################################                                                      ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [#######################################################################################################################################################                                         ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [###############################################################################################################################################################                                 ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##########################################################################################################################################################################                      ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##################################################################################################################################################################################              ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [######################################################################################################################################################################################          ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [########################################################################################################################################################################################        ] 1/1  Installing : lsof-4.87-6.el7.x86_64 [##############################################################################################################################################################################################  ] 1/1  Installing : lsof-4.87-6.el7.x86_64                                                                                                                                                                                                    1/1 
+  Verifying  : lsof-4.87-6.el7.x86_64                                                                                                                                                                                                    1/1 
+
+Installed:
+  lsof.x86_64 0:4.87-6.el7                                                                                                                                                                                                                   
+
+Complete!
+[root@lvm ~]# lsof /home
+COMMAND  PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+bash    1409 vagrant  cwd    DIR  253,2       21   64 /home
+[root@lvm ~]# exit
+logout
+[vagrant@lvm /]$ exit
+logout
+[root@lvm ~]# su -l vagrantcat /etc/fstabecho "`blkid | grep Home | awk '{print $2}'` /home xfs defaults 0 0" >>umount /homre
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[root@lvm ~]# exit
+logout
+[vagrant@lvm home]$ exit
+logout
+neva@Uneva:~$ vagrant ssh root
+The machine with the name 'root' was not found configured for
+this Vagrant environment.
+neva@Uneva:~$ vagrant ssh root
+Last login: Thu May 18 07:41:58 2023
+[vagrant@lvm ~]$ pwd
+/home/vagrant
+[vagrant@lvm ~]$ su -l root
+Password: 
+Last login: Thu May 18 07:50:43 UTC 2023 on pts/1
+[root@lvm ~]# pwd
+/root
+[root@lvm ~]# umount /rhome
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[root@lvm ~]# who
+[root@lvm ~]# ps -U vagrant
+  PID TTY          TIME CMD
+ 1852 ?        00:00:00 sshd
+ 1853 pts/0    00:00:00 bash
+ 1874 pts/0    00:00:00 su
+[root@lvm ~]# kill 18523
+[root@lvm ~]# kill 1853ps -U vagrant
+  PID TTY          TIME CMD
+ 1852 ?        00:00:00 sshd
+ 1853 pts/0    00:00:00 bash
+ 1874 pts/0    00:00:00 su
+[root@lvm ~]# pkill -u vagrant
+Connection to 127.0.0.1 closed by remote host.
+neva@Uneva:~$ vagrant ssh root
+Last login: Thu May 18 07:57:28 2023 from 10.0.2.2
+[vagrant@lvm ~]$ cat /etc/ssh
+cat: /etc/ssh: Is a directory
+[vagrant@lvm ~]$ su -l root
+Password: 
+Last login: Thu May 18 07:58:10 UTC 2023 on pts/0
+[root@lvm ~]# cd /etc/ssh
+[root@lvm ssh]# ls
+moduli  ssh_config  sshd_config  ssh_host_ecdsa_key  ssh_host_ecdsa_key.pub  ssh_host_ed25519_key  ssh_host_ed25519_key.pub  ssh_host_rsa_key  ssh_host_rsa_key.pub
+[root@lvm ssh]# pwd
+/etc/ssh
+[root@lvm ssh]# umount /home
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[root@lvm ssh]# nano  sshd_config
+  GNU nano 2.3.1                                                                  File: sshd_config                                                                                                                                          #$OpenBSD: sshd_config,v 1.100 2016/08/15 12:32:04 naddy Exp $# This is the sshd server system-wide configuration file.  See# sshd_config(5) for more information.# This sshd was compiled with PATH=/usr/local/bin:/usr/bin# The strategy used for options in the default sshd_config shipped with# OpenSSH is to specify options with their default value where# possible, but leave them commented.  Uncommented options override the# default value.# If you want to change the port on a SELinux system, you have to tell# SELinux about this change.# semanage port -a -t ssh_port_t -p tcp #PORTNUMBER##Port 22#AddressFamily any#ListenAddress 0.0.0.0#ListenAddress ::HostKey /etc/ssh/ssh_host_rsa_key#HostKey /etc/ssh/ssh_host_dsa_keyHostKey /etc/ssh/ssh_host_ecdsa_keyHostKey /etc/ssh/ssh_host_ed25519_key# Ciphers and keying#RekeyLimit default none# Logging#SyslogFacility AUTHSyslogFacility AUTHPRIV#LogLevel INFO# Authentication:#LoginGraceTime 2m#PermitRootLogin yes#StrictModes yes#MaxAuthTries 6#MaxSessions 10#PubkeyAuthentication yes# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2# but this is overridden so installations will only check .ssh/authorized_keysAuthorizedKeysFile.ssh/authorized_keys#AuthorizedPrincipalsFile none#AuthorizedKeysCommand none#AuthorizedKeysCommandUser nobody# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts#HostbasedAuthentication no# Change to yes if you don't trust ~/.ssh/known_hosts for# HostbasedAuthentication#IgnoreUserKnownHosts no[ Read 140 lines ]^G Get Help^O WriteOut^R Read File^Y Prev Page^K Cut Text^C Cur Pos^X Exit^J Justify^W Where Is^V Next Page^U UnCut Text^T To SpellModifiedFile Name to Write: sshd_config                                                                                                                                                                                                                         M-D DOS Format M-A Append            M-B Backup FileC Cancel          M-M Mac Format M-P Prepend         [ Wrote 140 lines ]^O WriteOut^R Read File^Y Prev Page^K Cut Text^C Cur PosX Exit  ^J Justify^W Where Is^V Next Page^U UnCut Text^T To Spell[root@lvm ssh]# exit
+logout
+[vagrant@lvm ~]$ exit
+logout
+neva@Uneva:~$ vagrant ssh
+Last login: Thu May 18 08:01:44 2023 from 10.0.2.2
+[vagrant@lvm ~]$ pwd
+/home/vagrant
+[vagrant@lvm ~]$ su -l root
+Password: 
+Last login: Thu May 18 08:02:54 UTC 2023 on pts/0
+[root@lvm ~]# cd /
+[root@lvm /]# umount /home
+umount: /home: target is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+[root@lvm /]# exit
+logout
+[vagrant@lvm ~]$ exit
+logout
+neva@Uneva:~$ nanopwd
+/home/neva
+neva@Uneva:~$ nano Vagrantfile
+[ Reading... ][ Read 77 lines ]  GNU nano 6.2                                                                                                     Vagrantfile                                                                                                               ^G Help^O Write Out^W Where Is^K Cut^T Execute^C LocationM-U UndoM-A Set MarkM-] To Bracket    M-Q Previous^B Back^ Prev Word^A Home^X Exit^R Read File^\ Replace^U Paste^J Justify^/ Go To Line     M-E RedoM-6 Copy^Q Where WasM-W Next^F Forward^ Next Word^E End# -*- mode: ruby -*-# vim: set ft=ruby :home = ENV['HOME']ENV["LC_ALL"] = "en_US.UTF-8"MACHINES = {:lvm => {:box_name => "centos/7",:box_version => "1804.02",:ip_addr => '192.168.56.11',:disks => {:sata1 => {:dfile => home + '/VirtualBox VMs/sata1.vdi',:size => 10240,:port => 1},:sata2 => {:dfile => home + '/VirtualBox VMs/sata2.vdi',:size => 2048, # Megabytes:port => 2},:sata3 => {:dfile => home + '/VirtualBox VMs/sata3.vdi',:size => 1024, # Megabytes:port => 3},:sata4 => {:dfile => home + '/VirtualBox VMs/sata4.vdi',:size => 1024,:port => 4}}},}Vagrant.configure("2") do |config| config.vm.synced_folder ".", "/vagrant", disabled: trueconfig.vm.box_version = "1804.02"MACHINES.each do |boxname, boxconfig|config.vm.define boxname do |box|box.vm.box = boxconfig[:box_name]box.vm.host_name = boxname.to_s #box.vm.network "forwarded_port", guest: 3260, host: 3260+offsetbox.vm.network "private_network", ip: boxconfig[:ip_addr]box.vm.provider :virtualbox do |vb|vb.customize ["modifyvm", :id, "--memory", "256"]needsController = falseboxconfig[:disks].each do |dname, dconf|unless File.exist?(dconf[:dfile])vb.customize ['createhd', '--filename', dconf[:dfile], '--variant', 'Fixed', '--size', dconf[:size]]needsController =  trueendend*config.ssh.username = 'root'config.ssh.password = 'vagrant'config.ssh.insert_key = 'true'                            M-D DOS Format                              M-A Append          M-B Backup FileC Cancel                           M-M Mac Format         M-P Prepend                         ^T BrowseFile Name to Write: Vagrantfile                                                                                                                                                                                                               [ Writing... ] [ Wrote 80 lines ]^O Write Out^W Where Is^K Cut            ^T Execute^C LocationM-U Undo          M-A Set MarkM-] To Bracket    M-Q Previous      ^B Back     ^ Prev Word^A HomeX Exit  ^R Read File^\ Replace^U Paste          ^J Justify^/ Go To Line     M-E Redo          M-6 Copy^Q Where WasM-W Next   ^F Forward^ Next Word^E Endneva@Uneva:~$ vagrant ssh
+Last login: Thu May 18 08:07:10 2023
+[root@lvm ~]# pwd
+/root
+[root@lvm ~]# umount /home
+[root@lvm ~]# lvcreate onvert --merge /dev/VolGroup00/home_snap
+  Merging of volume VolGroup00/home_snap started.
+  VolGroup00/LogVol_Home: Merged: 100.00%
+[root@lvm ~]# mount /home
+[root@lvm ~]# ls /ho
+anaconda-ks.cfg  original-ks.cfg
+[root@lvm ~]# ls /home
+file1  file10  file11  file12  file{1-20}  file13  file14  file15  file16  file17  file18  file19  file2  file20  file3  file4  file5  file6  file7  file8  file9  vagrant
+[root@lvm ~]# exit
+logout
+neva@Uneva:~$ 
